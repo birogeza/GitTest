@@ -1,16 +1,10 @@
 package com.lotterygame.entity;
 
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
-import javax.persistence.JoinColumn;
+import javax.persistence.*;
+
+import com.lotterygame.entity.Game;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +12,7 @@ import java.util.List;
 //@Table( name="users" )
 public class User {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column( unique=true, nullable=false )
     private String userName;
@@ -30,14 +24,10 @@ public class User {
     private String vehicle;
     private String email;
     private String phone;
-//    @ManyToMany( cascade = CascadeType.ALL, fetch = FetchType.EAGER )
-//    @JoinTable(
-//            name = "users_games",
-//            joinColumns = {@JoinColumn(name="user_id")},
-//            inverseJoinColumns = {@JoinColumn(name="game_id")}
-//    )
 
-    //private List<Game> games = new ArrayList<Game>();
+
+    @OneToMany(mappedBy = "user")
+    private List<Game> games;
 
     public void setId(Long id) {
         this.id = id;

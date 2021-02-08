@@ -19,10 +19,10 @@ public class Game {
     private int num4;
     private int num5;
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-//    @ManyToMany( mappedBy = "users")
-//    private List<User> users = new ArrayList<User>();
+    @ManyToOne
+    private User user;
 
     public void setId(Long id) {
         this.id = id;
@@ -72,12 +72,21 @@ public class Game {
         this.num5 = num5;
     }
 
-    public Game(int num1, int num2, int num3, int num4, int num5) {
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Game(int num1, int num2, int num3, int num4, int num5, User user) {
         this.num1 = num1;
         this.num2 = num2;
         this.num3 = num3;
         this.num4 = num4;
         this.num5 = num5;
+        this.user = user;
     }
 
 
